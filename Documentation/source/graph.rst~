@@ -1,0 +1,62 @@
+.. graph:
+
+*****
+Graph
+*****
+
+This is the documentation of the graph module, which contains the class :class:`CorrelGraph`.
+
+.. class:: CorrelGraph
+
+This class represents both an EEG and a phase shift graph. Nodes can be added to the graph, the graph can then be modified and every nodes' degree can be requested.
+
+Every edge in the graph is colored depending on its value. Considering an EEG graph the higher the value is the more purple the edge is visualized. Edges can vary from yellow over pink to purple. By contrary the higher an edge's value in a phase shift graph is the more cyan/blue it's visualized. Edges can vary from yellow over turquoise to blue.
+
+The :class:`CorrelGraph` extends the networkx.MultiDiGraph.
+	
+    .. method:: CorrelGraph.__init__(csvData)
+
+	creates an instance of the class and holds all class attributes
+	
+	**parameter** csvData: the parameter csvData must be a string. It represents the path of the file the graph is created from
+
+    .. method:: CorrelGraph.addNodes(type)
+
+	This method reads out every value (representing an edge) of the csv file and adds it to the graph if its value isn't 0. 
+
+	Afterwards the graph is drawn to an extern window.
+
+	**parameter** type: the type of the graph that's supposed to be drawn, either 'eeg' or 'ps', *string type*
+
+    .. method:: CorrelGraph.modifyGraph(lowerLim, upperLim, type)
+
+	This method fades out all edges with values not within the limits.
+	It modifies the original graph by removing all concerning edges and nodes. The graph is then redrawn.
+
+	**parameter** lowerLim: the lower limit, only edges with a higher or equal value are kept in the graph, *float type*
+
+	**parameter** upperLim: the upper limit, only edges with a lower or equal value are kept in the graph, *float type*
+ 
+	**parameter** type: the type of the graph that's supposed to be drawn, either 'eeg' or 'ps', *string type*
+
+    .. method:: CorrelGraph.getDegree(key)
+	
+	returns the number of outgoing edges (degree) from the given node.
+
+	**parameter** key: the number of the node whose degree is supposed to be displayed, *integer type*
+
+	**return**: degree of the node, *integer type*
+
+    .. method:: CorrelGraph.mapValueToColor(edges, type)
+	
+	maps a color string to each edge in the graph and saves it in the class attribute "colors".
+	
+	**parameter** edges: list of edges that are supposed to be colored, *list type*
+
+	**parameter** type: the type of the graph that's supposed to be drawn, either 'eeg' or 'ps', *string type*
+
+    .. method:: CorrelGraph.saveGraph(fname)
+
+	saves the graph into the given path. Supported formats are png, pdf, ps, eps and svg.
+
+	**parameter** fname: the path of the saved file, *string type*

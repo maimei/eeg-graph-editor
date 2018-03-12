@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model &mdash; GraphEditor 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="GraphEditor 1.0 documentation" href="index.html" />
+    <link rel="up" title="Reference Documentation" href="referencedocumentation.html" />
+    <link rel="prev" title="Graph" href="graph.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="graph.html" title="Graph"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">GraphEditor 1.0 documentation</a> &raquo;</li>
+          <li><a href="referencedocumentation.html" accesskey="U">Reference Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model">
+<h1>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation of the model module, which contains the class <a class="reference internal" href="#GraphModel" title="GraphModel"><tt class="xref py py-class docutils literal"><span class="pre">GraphModel</span></tt></a>.</p>
+<dl class="class">
+<dt id="GraphModel">
+<em class="property">class </em><tt class="descname">GraphModel</tt><a class="headerlink" href="#GraphModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This class represents the model of the GraphEditor. It is the mediator between the view (GUI) and the graph (logical component). It connects every graphical component to a logical function.</p>
+<p>The <a class="reference internal" href="#GraphModel" title="GraphModel"><tt class="xref py py-class docutils literal"><span class="pre">GraphModel</span></tt></a> extends the QtGui.QDialog, the GraphView and the CorrelGgraph.</p>
+<blockquote>
+<div><dl class="method">
+<dt id="GraphModel.__init__">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">__init__</tt><big>(</big><em>form</em><big>)</big><a class="headerlink" href="#GraphModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an instance of the class and holds all class attributes.</p>
+<p>Sets the connections between buttons and functions.</p>
+<p><strong>parameter</strong> form: QtGui.QWidget instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.onBrowse">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">onBrowse</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.onBrowse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a graph from the chosen csv file by getting the file path.
+Depending on which graph type is chosen, a new graph is created and drawn.</p>
+<p>Gives a warning if no graph type is chosen or if the browsing is canceled.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.onSave">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">onSave</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.onSave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a graph onto the computer. Gets the file path including the name of the created file. Calls the graph&#8217;s saveGraph method. A file of the format png, pdf, ps, eps or svg can be found in the chosen path.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.onSelectOk">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">onSelectOk</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.onSelectOk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the degree of the given node. Checks which graph type is selected.
+Calls the getDegree method of the selected graph.</p>
+<p>Gives a warning if you try to get the degree of a node in a phase shift or if no graph type is selected and no file has been browsed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.onNext">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">onNext</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.onNext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the next file path, creates and draws a new graph from the file path.</p>
+<p>Gives a warning when file path couldn&#8217;t be found or no file was browsed before.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.onPrevious">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">onPrevious</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.onPrevious" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the file path of the previous file, creates and draws a new graph from the file path.</p>
+<p>Gives a warning when file path couldn&#8217;t be found or no file was browsed before.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.generatePath">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">generatePath</tt><big>(</big><em>num</em><big>)</big><a class="headerlink" href="#GraphModel.generatePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a new path from the current one.</p>
+<p><strong>parameter</strong> num:</p>
+<blockquote>
+<div><p>valid parameters only are 1 or -1</p>
+<p>parameter 1: e.g. home/../data_02.csv -&gt; home/../data_03.csv</p>
+<p>parameter -1: e.g. home/../data_02.csv - &gt; home/../data_01.csv</p>
+</div></blockquote>
+<p><strong>return</strong>: returns a string that represents the new file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GraphModel.setNewSpinBoxLimits">
+<tt class="descclassname">GraphModel.</tt><tt class="descname">setNewSpinBoxLimits</tt><big>(</big><big>)</big><a class="headerlink" href="#GraphModel.setNewSpinBoxLimits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the min and max value for the spinboxes each time a new graph is created. This happens in <a class="reference internal" href="#GraphModel.onBrowse" title="GraphModel.onBrowse"><tt class="xref py py-meth docutils literal"><span class="pre">onBrowse()</span></tt></a>, <a class="reference internal" href="#GraphModel.onNext" title="GraphModel.onNext"><tt class="xref py py-meth docutils literal"><span class="pre">onNext()</span></tt></a> and <a class="reference internal" href="#GraphModel.onPrevious" title="GraphModel.onPrevious"><tt class="xref py py-meth docutils literal"><span class="pre">onPrevious()</span></tt></a>.</p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="graph.html"
+                        title="previous chapter">Graph</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="graph.html" title="Graph"
+             >previous</a> |</li>
+        <li><a href="index.html">GraphEditor 1.0 documentation</a> &raquo;</li>
+          <li><a href="referencedocumentation.html" >Reference Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, H. Meissner.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

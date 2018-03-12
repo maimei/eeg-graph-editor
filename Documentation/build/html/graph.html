@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Graph &mdash; GraphEditor 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="GraphEditor 1.0 documentation" href="index.html" />
+    <link rel="up" title="Reference Documentation" href="referencedocumentation.html" />
+    <link rel="next" title="Model" href="model.html" />
+    <link rel="prev" title="View" href="view.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="model.html" title="Model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="view.html" title="View"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">GraphEditor 1.0 documentation</a> &raquo;</li>
+          <li><a href="referencedocumentation.html" accesskey="U">Reference Documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="graph">
+<h1>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation of the graph module, which contains the class <a class="reference internal" href="#CorrelGraph" title="CorrelGraph"><tt class="xref py py-class docutils literal"><span class="pre">CorrelGraph</span></tt></a>.</p>
+<dl class="class">
+<dt id="CorrelGraph">
+<em class="property">class </em><tt class="descname">CorrelGraph</tt><a class="headerlink" href="#CorrelGraph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This class visualizes both an EEG and a phase shift graph. Nodes can be added to the graph, the graph can then be modified and every nodes&#8217; degree can be requested.</p>
+<p>Every edge in the graph is colored depending on its value. Considering an EEG graph the higher the value is the more purple the edge is visualized. Edges can vary from yellow over pink to purple. By contrary the higher an edge&#8217;s value in a phase shift graph is the more cyan/blue it&#8217;s visualized. Edges can vary from yellow over turquoise to blue.</p>
+<p>The <a class="reference internal" href="#CorrelGraph" title="CorrelGraph"><tt class="xref py py-class docutils literal"><span class="pre">CorrelGraph</span></tt></a> extends the networkx.MultiDiGraph.</p>
+<blockquote>
+<div><dl class="method">
+<dt id="CorrelGraph.__init__">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">__init__</tt><big>(</big><em>csvData</em><big>)</big><a class="headerlink" href="#CorrelGraph.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates an instance of the class and holds all class attributes</p>
+<p><strong>parameter</strong> csvData: the parameter csvData must be a string. It represents the path of the file the graph is created from</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CorrelGraph.addNodes">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">addNodes</tt><big>(</big><em>type</em><big>)</big><a class="headerlink" href="#CorrelGraph.addNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method reads out every value (representing an edge) of the csv file and adds it to the graph if its value isn&#8217;t 0.</p>
+<p>Afterwards the graph is drawn to an extern window.</p>
+<p><strong>parameter</strong> type: the type of the graph that&#8217;s supposed to be drawn, either &#8216;eeg&#8217; or &#8216;ps&#8217;, <em>string type</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CorrelGraph.modifyGraph">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">modifyGraph</tt><big>(</big><em>lowerLim</em>, <em>upperLim</em>, <em>type</em><big>)</big><a class="headerlink" href="#CorrelGraph.modifyGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method fades out all edges with values not within the limits.
+It modifies the original graph by removing all concerning edges and nodes. The graph is then redrawn.</p>
+<p><strong>parameter</strong> lowerLim: the lower limit, only edges with a higher or equal value are kept in the graph, <em>float type</em></p>
+<p><strong>parameter</strong> upperLim: the upper limit, only edges with a lower or equal value are kept in the graph, <em>float type</em></p>
+<p><strong>parameter</strong> type: the type of the graph that&#8217;s supposed to be drawn, either &#8216;eeg&#8217; or &#8216;ps&#8217;, <em>string type</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CorrelGraph.getDegree">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">getDegree</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#CorrelGraph.getDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the number of outgoing edges (degree) from the given node.</p>
+<p><strong>parameter</strong> key: the number of the node whose degree is supposed to be displayed, <em>integer type</em></p>
+<p><strong>return</strong>: degree of the node, <em>integer type</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CorrelGraph.mapValueToColor">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">mapValueToColor</tt><big>(</big><em>edges</em>, <em>type</em><big>)</big><a class="headerlink" href="#CorrelGraph.mapValueToColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>maps a color string to each edge in the graph and saves it in the class attribute &#8220;colors&#8221;.</p>
+<p><strong>parameter</strong> edges: list of edges that are supposed to be colored, <em>list type</em></p>
+<p><strong>parameter</strong> type: the type of the graph that&#8217;s supposed to be drawn, either &#8216;eeg&#8217; or &#8216;ps&#8217;, <em>string type</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CorrelGraph.saveGraph">
+<tt class="descclassname">CorrelGraph.</tt><tt class="descname">saveGraph</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#CorrelGraph.saveGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves the graph into the given path. Supported formats are png, pdf, ps, eps and svg.</p>
+<p><strong>parameter</strong> fname: the path of the saved file, <em>string type</em></p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="view.html"
+                        title="previous chapter">View</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="next chapter">Model</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/graph.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="model.html" title="Model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="view.html" title="View"
+             >previous</a> |</li>
+        <li><a href="index.html">GraphEditor 1.0 documentation</a> &raquo;</li>
+          <li><a href="referencedocumentation.html" >Reference Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, H. Meissner.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+.. components:
+
+==========
+Components
+==========
+
+The GraphEditor consists of three different modules:
+
+ * view
+ * graph
+ * model
+
+.. _the-view:
+
+The View
+--------
+
+The view module represents the GraphEditor GUI and contains all components (buttons, textlines, spinboxes etc.) that are needed to execute certain actions.
+
+.. _the-graph:
+
+The Graph
+---------
+
+The graph module contains the class :class:`CorrelGraph` that is able to visualize an eeg graph and a phase shift graph. To distinguish between those two graphs the edges are colored differently.
+
+The class CorrelGraph covers all the necessary functions to paint the graph or to get certain information about it. 
+
+.. _the-model:
+
+The Model
+---------
+
+The model module is the mediator between the view and the graph. It contains all functions to tell every view element what to do when a certain action is executed by the user. 
+
+It leads this signal to the graph module, where the logic is realized.
+So in order to launch the GraphEditor run the model module.
+

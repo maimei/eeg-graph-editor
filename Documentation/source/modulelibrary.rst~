@@ -1,0 +1,14 @@
+.. modulelibrary:
+
+**************
+Module Library
+**************
+
+On the following pages the three modules of the GraphEditor are documented.
+
+.. toctree::
+   :maxdepth: 2
+
+   view.rst
+   graph.rst
+   model.rst

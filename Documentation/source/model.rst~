@@ -1,0 +1,75 @@
+.. model:
+
+*****
+Model
+*****
+
+This is the documentation of the model module, which contains the class :class:`GraphModel`.
+
+.. class:: GraphModel
+
+This class represents the model of the GraphEditor. It is the mediator between the view (GUI) and the graph (logical component). It connects every graphical component to a logical function.
+
+The :class:`GraphModel` extends the QtGui.QDialog, the GraphView and the EPGgraph.
+
+    .. method:: GraphModel.__init__(form)
+	
+	Creates an instance of the class and holds all class attributes.
+	
+	Sets the connections between buttons and functions.
+
+	**parameter** form: QtGui.QWidget instance
+
+    .. method:: GraphModel.onBrowse()
+	
+	Creates a graph from the chosen csv file by getting the file path. 
+        Depending on which graph type is chosen, a new graph is created and drawn.
+
+	Gives a warning if no graph type is chosen or if the browsing is canceled.
+
+    .. method:: GraphModel.onSave()
+	
+	Saves a graph onto the computer. Gets the file path including the name of the created file. Calls the graph's saveGraph method. A file of the format png, pdf, ps, eps or svg can be found in the chosen path.
+
+    .. method:: GraphModel.onSelectOk()
+	
+	Displays the degree of the given node. Checks which graph type is selected. 
+        Calls the getDegree method of the selected graph. 
+
+        Gives a warning if you try to get the degree of a node in a phase shift or if no graph type is selected and no file has been browsed.
+
+    .. method GraphModel.onFadeOk()
+	
+	Fades out all edges in the graph if its value is not within the limits.    
+
+        Gives a warning if no graph type is chosen or if no file has been been selected.
+
+    .. method:: GraphModel.onNext()
+
+	Generates the next file path, creates and draws a new graph from the file path.
+     
+        Gives a warning when file path couldn't be found or no file was browsed before.
+
+    .. method:: GraphModel.onPrevious()
+
+	Generates the file path of the previous file, creates and draws a new graph from the file path.
+        
+	Gives a warning when file path couldn't be found or no file was browsed before.
+
+    .. method:: GraphModel.generatePath(num)
+
+	Generates a new path from the current one.
+
+	**parameter** num:
+
+            valid parameters only are 1 or -1
+
+            parameter 1: e.g. home/../data_02.csv -> home/../data_03.csv
+
+            parameter -1: e.g. home/../data_02.csv - > home/../data_01.csv
+
+        **return**: returns a string that represents the new file path
+
+    .. method:: GraphModel.setNewSpinBoxLimits()
+
+	Sets the min and max value for the spinboxes each time a new graph is created. This happens in :meth:`onBrowse`, :meth:`onNext` and :meth:`onPrevious`.
